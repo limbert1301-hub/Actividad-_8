@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>LISTADO DE CATEGORIAS</h1>
+<a href="{{ url_for('bp_categoria.create' )}}">Nueva Categoria</a>
+
+<ul>
+    {% for item in categoria %}
+    <li> Nombre: {{item.nombre}} Descripcion: {{item.descripcion}} </li>
+    {% else %}
+    <li>No hay Categorias</li>
+    {% endfor %}
+</ul>
+{% endblock %}

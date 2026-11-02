@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1> PAGINA PRINCIPAL </h1>
+<ul>
+    <li><a href="{{ url_for('bp_usuario.index') }}">Usuarios</a></li>
+    <li><a href="{{ url_for('bp_categoria.index') }}">Categorias</a></li>
+</ul>
+
+{% endblock %}

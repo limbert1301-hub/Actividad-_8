@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1> CREAR CATEGORIA </h1>
+<form action ="{{ url_for('bp_categoria.create')}}" method = "POST">
+    <label for="">Nombre: </label>
+    <input type="text" name="nombre" placeholder="Nombre"
+    required="required">
+
+    <label for="">Descripcion(Opcional): </label>
+    <input type="text" name="descripcion" placeholder="Descripcion"
+    required="required">
+
+    <input type="submit" value="Enviar">
+</form>
+
+{% endblock %}

@@ -9,4 +9,4 @@ class Usuario(db.Model):
     password = db.Column(db.String, nullable=False)
 
     def __repr__(self):
-        return f"<MIEMBRO: {self.nombre} - {self.email}>"
+        return f"<USUARIO: {self.nombre} - {self.email}>"
