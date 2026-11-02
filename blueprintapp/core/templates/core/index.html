@@ -1,10 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1> PAGINA PRINCIPAL </h1>
-<ul>
-    <li><a href="{{ url_for('bp_usuario.index') }}">Usuarios</a></li>
-    <li><a href="{{ url_for('bp_categoria.index') }}">Categorias</a></li>
-</ul>
+<div style="max-width: 400px; margin: 40px auto; text-align: center;">
+    <h1 style="color: #212529; font-size: 2rem; margin-bottom: 25px;">PÁGINA PRINCIPAL</h1>
 
+    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 12px;">
+        <li>
+            <a href="{{ url_for('bp_usuario.index') }}" style="display: block; background-color: #f8f9fa; color: #212529; padding: 12px; border: 1px solid #dee2e6; border-radius: 6px; text-decoration: none; font-weight: bold; transition: 0.2s;">👥 Módulo de Usuarios</a>
+        </li>
+        <li>
+            <a href="{{ url_for('bp_categoria.index') }}" style="display: block; background-color: #f8f9fa; color: #212529; padding: 12px; border: 1px solid #dee2e6; border-radius: 6px; text-decoration: none; font-weight: bold; transition: 0.2s;">📂 Módulo de Categorías</a>
+        </li>
+        <li>
+            <a href="{{ url_for('bp_anuncio.index') }}" style="display: block; background-color: #f8f9fa; color: #212529; padding: 12px; border: 1px solid #dee2e6; border-radius: 6px; text-decoration: none; font-weight: bold; transition: 0.2s;">📢 Módulo de Anuncios</a>
+        </li>
+    </ul>
+</div>
 {% endblock %}

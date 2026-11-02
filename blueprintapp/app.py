@@ -17,10 +17,12 @@ def create_app():
     from blueprintapp.usuarios.routes import bp_usuario
     from blueprintapp.core.routes import bp_core
     from blueprintapp.categorias.routes import bp_categoria
+    from blueprintapp.anuncios.routes import bp_anuncio
 
     #2. Registrar el blueprint (para cada modulo)
     app.register_blueprint(bp_usuario, url_prefix="/usuarios")
     app.register_blueprint(bp_core, url_prefix="/")
     app.register_blueprint(bp_categoria, url_prefix="/categorias")
+    app.register_blueprint(bp_anuncio, url_prefix="/anuncios")
 
     return app
