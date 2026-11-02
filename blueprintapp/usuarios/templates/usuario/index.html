@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div style="max-width: 700px; margin: 30px auto; padding: 20px; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+<div style="max-width: 800px; margin: 30px auto; padding: 25px; background: #fff; border: 1px solid #dee2e6; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
         <h1 style="color: #212529; font-size: 1.8rem; margin: 0;">LISTADO DE USUARIOS</h1>
         <a href="{{ url_for('bp_usuario.create') }}" style="background-color: #212529; color: white; padding: 8px 15px; border-radius: 5px; text-decoration: none; font-size: 0.9rem; font-weight: bold;">+ Nuevo Usuario</a>
@@ -10,8 +10,15 @@
     <ul style="list-style: none; padding: 0; margin: 0;">
         {% for item in usuarios %}
         <li style="padding: 12px 15px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-weight: 500; color: #333;">Nombre: {{ item.nombre }}</span>
-            <span style="color: #6c757d; font-size: 0.9rem;">Email: {{ item.email }}</span>
+            <div>
+                <span style="font-weight: bold; color: #333;">{{ item.nombre }}</span> 
+                <span style="color: #6c757d; font-size: 0.9rem; margin-left: 10px;">({{ item.email }})</span>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <a href="{{ url_for('bp_usuario.show', id=item.id) }}" style="color: #0dcaf0; text-decoration: none; font-weight: bold; font-size: 0.9rem;">Ver</a>
+                <a href="{{ url_for('bp_usuario.update', id=item.id) }}" style="color: #ffc107; text-decoration: none; font-weight: bold; font-size: 0.9rem;">Editar</a>
+                <a href="{{ url_for('bp_usuario.delete', id=item.id) }}" style="color: #dc3545; text-decoration: none; font-weight: bold; font-size: 0.9rem;" onclick="return confirm('¿Estás seguro de eliminar este usuario?');">Eliminar</a>
+            </div>
         </li>
         {% else %}
         <li style="padding: 20px; text-align: center; color: #6c757d; font-style: italic;">No hay miembros registrados.</li>

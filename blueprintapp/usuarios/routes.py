@@ -20,12 +20,9 @@ def create():
         nombre = request.form.get('nombre')
         email = request.form.get('email')
         password = request.form.get('password')
-        # Crear un objeto usuario
         usuario = Usuario(nombre=nombre, email=email, password=password)
-        #Insertar en la base de datos a traves del ORM
         db.session.add(usuario)
         db.session.commit()
-        # Redireccion al listado de usuarios
         return redirect(url_for('bp_usuario.index'))
 
 @bp_usuario.route("/login", methods = ['GET', 'POST'])
@@ -35,18 +32,12 @@ def login():
     elif request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
-        
-        # Validar credenciales en la base de datos
         usuario = Usuario.query.filter_by(email=email, password=password).first()
-        
         if usuario:
-            # Guardar datos básicos en sesión
             session['usuario_id'] = usuario.id
             session['usuario_nombre'] = usuario.nombre
-            # Redirigir al listado de anuncios o bienvenida
             return redirect(url_for('bp_anuncio.index'))
         else:
-            # Si falla, recargar con un mensaje de error simple
             error = "Correo o contraseña incorrectos"
             return render_template('usuario/login.html', error=error)
 
@@ -54,3 +45,31 @@ def login():
 def logout():
     session.clear()
     return redirect(url_for('bp_core.index'))
+
+# --- NUEVAS RUTAS PARA CONSULTA, MODIFICACIÓN Y ELIMINACIÓN ---
+
+@bp_usuario.route("/show/<int:id>")
+def show(id):
+    usuario = Usuario.query.get_or_404(id)
+    return render_template('usuario/show.html', usuario=usuario)
+
+@bp_usuario.route("/update/<int:id>", methods=['GET', 'POST'])
+def update(id):
+    usuario = Usuario.query.get_or_404(id)
+    if request.method == 'GET':
+        return render_template('usuario/update.html', usuario=usuario)
+    elif request.method == 'POST':
+        usuario.nombre = request.form.get('nombre')
+        usuario.email = request.form.get('email')
+        password = request.form.get('password')
+        if password:
+            usuario.password = password
+        db.session.commit()
+        return redirect(url_for('bp_usuario.index'))
+
+@bp_usuario.route("/delete/<int:id>")
+def delete(id):
+    usuario = Usuario.query.get_or_404(id)
+    db.session.delete(usuario)
+    db.session.commit()
+    return redirect(url_for('bp_usuario.index'))

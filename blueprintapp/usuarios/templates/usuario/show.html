@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="max-width: 450px; margin: 30px auto; padding: 25px; background: #fff; border: 1px solid #dee2e6; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+    <h1 style="color: #212529; font-size: 1.6rem; margin-top: 0; margin-bottom: 20px; text-align: center;">DETALLES DEL USUARIO</h1>
+    
+    <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px;">
+        <p style="margin: 0;"><strong>ID:</strong> {{ usuario.id }}</p>
+        <p style="margin: 0;"><strong>Nombre:</strong> {{ usuario.nombre }}</p>
+        <p style="margin: 0;"><strong>Correo:</strong> {{ usuario.email }}</p>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="{{ url_for('bp_usuario.index') }}" style="background-color: #6c757d; color: white; padding: 10px 20px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.9rem;">Volver al Listado</a>
+    </div>
+</div>
+{% endblock %}

@@ -10,6 +10,7 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///bd_anuncios.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+    app.secret_key = 'super_secret_key_123'
     db.init_app(app)
     migrate.init_app(app,db)
 

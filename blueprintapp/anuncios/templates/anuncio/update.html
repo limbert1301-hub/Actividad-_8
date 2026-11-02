@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="max-width: 450px; margin: 30px auto; padding: 25px; background: #fff; border: 1px solid #dee2e6; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+    <h1 style="color: #212529; font-size: 1.6rem; margin-top: 0; margin-bottom: 20px; text-align: center;">EDITAR ANUNCIO</h1>
+    
+    <form action="{{ url_for('bp_anuncio.update', id=anuncio.id) }}" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
+        <div>
+            <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Título:</label>
+            <input type="text" name="titulo" value="{{ anuncio.titulo }}" required="required" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+        </div>
+
+        <div>
+            <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Contenido:</label>
+            <textarea name="contenido" required="required" rows="4" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-family: inherit;">{{ anuncio.contenido }}</textarea>
+        </div>
+
+        <div>
+            <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Usuario:</label>
+            <select name="usuario_id" required="required" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; background: #fff;">
+                {% for u in usuarios %}
+                <option value="{{ u.id }}" {% if u.id == anuncio.usuario_id %}selected{% endif %}>{{ u.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div>
+            <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Categoría:</label>
+            <select name="categoria_id" required="required" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; background: #fff;">
+                {% for c in categorias %}
+                <option value="{{ c.id }}" {% if c.id == anuncio.categoria_id %}selected{% endif %}>{{ c.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 10px;">
+            <input type="submit" value="Actualizar" style="flex: 1; background-color: #212529; color: white; padding: 12px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer;">
+            <a href="{{ url_for('bp_anuncio.index') }}" style="flex: 1; background-color: #6c757d; color: white; padding: 12px; border: none; border-radius: 4px; font-weight: bold; text-align: center; text-decoration: none; box-sizing: border-box;">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
